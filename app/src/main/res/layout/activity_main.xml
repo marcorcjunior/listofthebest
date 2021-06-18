@@ -23,4 +23,14 @@
         app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
         app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
 
+    <ProgressBar
+        android:id="@+id/load_open"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rv_list_projects"
+        app:layout_constraintTop_toTopOf="@+id/rv_list_projects" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
