@@ -37,8 +37,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [Kotlin](https://expo.io/)
 - [Material-UI](https://material.io/)
-- [Coroutines](https://www.typescriptlang.org/)
-- [Espresso](https://www.typescriptlang.org/)
+- [Coroutines](https://developer.android.com/kotlin/coroutines)
+- [Espresso](https://developer.android.com/training/testing/espresso?hl=pt-br)
 
 
 
