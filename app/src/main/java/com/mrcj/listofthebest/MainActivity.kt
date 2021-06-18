@@ -34,13 +34,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupRecyclerView()
-        addItems()
+        addItems("language:kotlina")
     }
 
-    private fun addItems() {
+    private fun addItems(q:String = "language:kotlin") {
         val callback = RetrofitUtils.getRetrofitInstance(urlBase)
             .create(Repositories::class.java)
-            .getList("language:kotlin", "stars", page)
+            .getList(q, "stars", page)
 
         callback.enqueue(object : Callback<Projects> {
             override fun onFailure(call: Call<Projects>, t: Throwable) {
@@ -55,7 +55,11 @@ class MainActivity : AppCompatActivity() {
                     Log.d(Log.VERBOSE.toString(), response.body().toString())
                     projectsAdapter.projects = ArrayList(response.body()!!.items!!)
                 } else {
-                    Snackbar.make(cl_list, "Houve um erro que nao pode ser tratado!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(cl_list, "Houve um erro que nao pode ser tratado!", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Reload") {
+                            addItems("language:kotlin")
+                        }
+                        .show()
                 }
             }
         })
