@@ -23,9 +23,35 @@
 - [x] Lista de Repositórios
 - [x] Exibir nome do repo, quantidade de estrelas, quantidade de fork, foto e nome do autor
 - [x] Scroll infinito
+- [ ] Testes unitários
 - [x] Kotlin
 - [x] Android Architecture Components
 - [ ] Testes de UI usando Espresso
 - [x] Rx ou Coroutines
 - [x] Cache de imagens e da API
-- [x] Suportar mudanças de orientação das telas sem perder o estado
+- [x] Suportar mudanças de orientação das telas sem perder o estado.
+
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [Kotlin](https://expo.io/)
+- [Material-UI](https://material.io/)
+- [Coroutines](https://www.typescriptlang.org/)
+- [Espresso](https://www.typescriptlang.org/)
+
+
+
+
+### Autor
+---
+
+<a href="https://github.com/marcorcjunior">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/20648410?v=4" width="100px;" alt=""/>
+ <br />
+ <sub><b>Marco Junior</b></sub></a> <a href="https://github.com/marcorcjunior">🚀</a>
+
+
+Feito com ❤️ por Marco Junior 👋🏽 Entre em contato!
+
+[![Linkedin Badge](https://img.shields.io/badge/-Marco_Jr-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/marcorcjunior/)](https://www.linkedin.com/in/marcorcjunior/) [![Gmail Badge](https://img.shields.io/badge/-marcoroberto48@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:marcoroberto48@gmail.com)](mailto:marcoroberto48@gmail.com)
