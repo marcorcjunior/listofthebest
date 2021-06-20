@@ -37,12 +37,12 @@ class MainActivity : AppCompatActivity() {
         addItems()
     }
 
-    private fun addItems() {
-        val callback = RetrofitUtils.getRetrofitInstance(urlBase)
-            .create(Repositories::class.java)
-            .getList("language:kotlin", "stars", page)
+    fun getCallBack() = RetrofitUtils.getRetrofitInstance(urlBase)
+        .create(Repositories::class.java)
+        .getList("language:kotlin", "stars", page)
 
-        callback.enqueue(object : Callback<Projects> {
+    fun addItems() {
+        getCallBack().enqueue(object : Callback<Projects> {
             override fun onFailure(call: Call<Projects>, t: Throwable) {
                 load_open.visible(false)
                 Snackbar.make(cl_list, t.message.toString(), Snackbar.LENGTH_LONG).show()

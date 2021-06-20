@@ -33,7 +33,6 @@ class ProjectsAdapter() : RecyclerView.Adapter<ProjectsAdapter.ProjectViewHolder
         RecyclerView.ViewHolder(parent.inflate(VIEW_ID)) {
 
         fun bind(project: Project) = with(itemView) {
-
             Picasso.with(itemView.context).load(project.owner.url_photo).into(itemView.imageView)
             itemView.tx_name.text = project.owner.name
             itemView.tx_name_project.text = project.name
