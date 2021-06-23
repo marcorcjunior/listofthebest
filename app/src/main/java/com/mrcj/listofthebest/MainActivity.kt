@@ -16,12 +16,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.mrcj.listofthebest.extesions.visible
 import com.mrcj.listofthebest.model.Projects
 import com.mrcj.listofthebest.rest.LoadState
+import com.mrcj.listofthebest.rest.Repositories
 import com.mrcj.listofthebest.rest.adapter.LoadStateAdapter
 import com.mrcj.listofthebest.rest.adapter.ProjectsAdapter
-import com.mrcj.listofthebest.service.ServiceProject
 
 
 class MainActivity : AppCompatActivity() {
+    private val urlBase : String = "https://api.github.com"
+
     var page : Int = 1
 
     lateinit var projectsAdapter: ProjectsAdapter
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
-    fun init() {
+    private fun init() {
         setupRecyclerView()
         addItems()
     }
@@ -61,8 +63,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    fun getListProjects(page: Int = 1, q: String = "language:kotlin", sort: String = "stars") =
+        RetrofitUtils.getRetrofitInstance(urlBase)
+            .create(Repositories::class.java)
+            .getList(q, sort, page)
+
+
     fun addItems() {
-        ServiceProject.getListProjects(page).enqueue(object : Callback<Projects> {
+        getListProjects(page).enqueue(object : Callback<Projects> {
             override fun onFailure(call: Call<Projects>, t: Throwable) {
                 load_open.visible(false)
                 Snackbar.make(cl_list, t.message.toString(), Snackbar.LENGTH_LONG).show()
