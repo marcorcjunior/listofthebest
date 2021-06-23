@@ -1,21 +1,12 @@
 package com.mrcj.listofthebest.rest.adapter
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.mrcj.listofthebest.R
 import com.mrcj.listofthebest.extesions.inflate
 import com.mrcj.listofthebest.model.Project
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.project_item.view.*
-import java.io.InputStream
-import java.net.URL
 
 
 class ProjectsAdapter() : RecyclerView.Adapter<ProjectsAdapter.ProjectViewHolder>() {
@@ -33,8 +24,7 @@ class ProjectsAdapter() : RecyclerView.Adapter<ProjectsAdapter.ProjectViewHolder
         RecyclerView.ViewHolder(parent.inflate(VIEW_ID)) {
 
         fun bind(project: Project) = with(itemView) {
-
-            Picasso.with(itemView.context).load(project.owner.url_photo).into(itemView.imageView)
+            Picasso.get().load(project.owner.url_photo).into(itemView.imageView);
             itemView.tx_name.text = project.owner.name
             itemView.tx_name_project.text = project.name
             itemView.tx_description.text = project.description
