@@ -30,7 +30,7 @@ internal class MainActivityTest {
     val mainActivity = ActivityTestRule<MainActivity>(MainActivity::class.java)
 
     @Test
-    fun testLitaScrollInfinity() {
+    fun litaScrollInfinity() {
         onView(isRoot()).perform(waitFor(5000))
 
         for (i in 1..8) {
@@ -40,7 +40,7 @@ internal class MainActivityTest {
     }
 
     @Test
-    fun testListScrollInfiniteReturn() {
+    fun listScrollInfiniteReturn() {
         onView(isRoot()).perform(waitFor(5000))
 
         for (i in 1..8) {
@@ -55,7 +55,7 @@ internal class MainActivityTest {
     }
 
     @Test
-    fun testRotateScreen() {
+    fun rotateScreen() {
         onView(isRoot()).perform(waitFor(5000))
         mainActivity.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 

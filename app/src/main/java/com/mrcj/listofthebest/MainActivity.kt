@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.MergeAdapter
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         addItems()
     }
 
-    private fun getCallBack() = RetrofitUtils.getRetrofitInstance(urlBase)
+    fun getCallBack() = RetrofitUtils.getRetrofitInstance(urlBase)
         .create(Repositories::class.java)
         .getList("language:kotlin", "stars", page)
 
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
 
-        adapter = MergeAdapter(projectsAdapter, loadStateAdapter)
+        adapter = ConcatAdapter(projectsAdapter, loadStateAdapter)
 
         addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
