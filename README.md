@@ -18,15 +18,22 @@
 	🚧  Concluído...  🚧
 </h4>
 
+<p align="center">
+  <a>
+    <img src="https://raw.githubusercontent.com/marcorcjunior/listofthebest/develop/app/src/main/ic_launcher-playstore.png" height="175" width="175" alt="List of the best" />
+  </a>
+</p>
+
+
 ### Features
 
 - [x] Lista de Repositórios
 - [x] Exibir nome do repo, quantidade de estrelas, quantidade de fork, foto e nome do autor
 - [x] Scroll infinito
-- [ ] Testes unitários
+- [x] Testes unitários
 - [x] Kotlin
 - [x] Android Architecture Components
-- [ ] Testes de UI usando Espresso
+- [x] Testes de UI usando Espresso
 - [x] Rx ou Coroutines
 - [x] Cache de imagens e da API
 - [x] Suportar mudanças de orientação das telas sem perder o estado.
@@ -39,8 +46,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Material-UI](https://material.io/)
 - [Coroutines](https://developer.android.com/kotlin/coroutines)
 - [Espresso](https://developer.android.com/training/testing/espresso?hl=pt-br)
-
-
 
 
 ### Autor

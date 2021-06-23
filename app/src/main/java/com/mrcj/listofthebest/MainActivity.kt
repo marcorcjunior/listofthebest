@@ -2,7 +2,6 @@ package com.mrcj.listofthebest
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,32 +16,53 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.mrcj.listofthebest.extesions.visible
 import com.mrcj.listofthebest.model.Projects
 import com.mrcj.listofthebest.rest.LoadState
-import com.mrcj.listofthebest.rest.Repositories
 import com.mrcj.listofthebest.rest.adapter.LoadStateAdapter
 import com.mrcj.listofthebest.rest.adapter.ProjectsAdapter
+import com.mrcj.listofthebest.service.ServiceProject
 
 
 class MainActivity : AppCompatActivity() {
-    private val urlBase : String = "https://api.github.com"
     var page : Int = 1
 
-    private lateinit var projectsAdapter: ProjectsAdapter
-    private lateinit var loadStateAdapter: LoadStateAdapter
+    lateinit var projectsAdapter: ProjectsAdapter
+    lateinit var loadStateAdapter: LoadStateAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        init()
+    }
 
+    fun init() {
         setupRecyclerView()
         addItems()
     }
 
-    fun getCallBack() = RetrofitUtils.getRetrofitInstance(urlBase)
-        .create(Repositories::class.java)
-        .getList("language:kotlin", "stars", page)
+    private fun setupRecyclerView() = with(rv_list_projects) {
+        projectsAdapter = ProjectsAdapter()
+        loadStateAdapter = LoadStateAdapter()
+
+        layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+
+        adapter = ConcatAdapter(projectsAdapter, loadStateAdapter)
+
+        addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if () {
+                    loadStateAdapter.loadState = LoadState.Loading
+                    postDelayed({
+                            page += 1
+                            addItems()
+                        },1000)
+                }
+            }
+        })
+    }
 
     fun addItems() {
-        getCallBack().enqueue(object : Callback<Projects> {
+        ServiceProject.getListProjects(page).enqueue(object : Callback<Projects> {
             override fun onFailure(call: Call<Projects>, t: Throwable) {
                 load_open.visible(false)
                 Snackbar.make(cl_list, t.message.toString(), Snackbar.LENGTH_LONG).show()
@@ -64,27 +84,4 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun setupRecyclerView() = with(rv_list_projects) {
-        projectsAdapter = ProjectsAdapter()
-        loadStateAdapter = LoadStateAdapter()
-
-        layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-
-        adapter = ConcatAdapter(projectsAdapter, loadStateAdapter)
-
-        addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    loadStateAdapter.loadState = LoadState.Loading
-                    postDelayed({
-                            page += 1
-                            addItems()
-                        },1000)
-                }
-            }
-        })
-    }
-
 }
