@@ -1,13 +1,22 @@
 package com.mrcj.listofthebest
 
-import android.content.Context
+import android.content.pm.ActivityInfo
+import android.view.View
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.action.ViewActions.swipeDown
+import androidx.test.espresso.action.ViewActions.swipeUp
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert
-import org.junit.Before
+import androidx.test.rule.ActivityTestRule
+import kotlinx.android.synthetic.main.activity_main.*
+import org.hamcrest.Matcher
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import retrofit2.Retrofit
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -17,22 +26,56 @@ import retrofit2.Retrofit
 @RunWith(AndroidJUnit4::class)
 internal class MainActivityTest {
 
-    private lateinit var mainActivity: MainActivity
+    @get:Rule
+    val mainActivity = ActivityTestRule<MainActivity>(MainActivity::class.java)
 
-    @Before
-    fun createLogHistory() {
-        mainActivity = MainActivity()
+    @Test
+    fun testLitaScrollInfinity() {
+        onView(isRoot()).perform(waitFor(5000))
+
+        for (i in 1..8) {
+            onView(withId(R.id.rv_list_projects)).perform(swipeUp())
+            onView(isRoot()).perform(waitFor(2000))
+        }
     }
 
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        Assert.assertEquals("com.mrcj.listofthebest.MainActivity", appContext.packageName)
+    fun testListScrollInfiniteReturn() {
+        onView(isRoot()).perform(waitFor(5000))
+
+        for (i in 1..8) {
+            onView(withId(R.id.rv_list_projects)).perform(swipeUp())
+            onView(isRoot()).perform(waitFor(2000))
+        }
+
+        for (i in 1..8) {
+            onView(withId(R.id.rv_list_projects)).perform(swipeDown())
+            onView(isRoot()).perform(waitFor(2000))
+        }
     }
 
     @Test
-    fun useInit() {
-        Assert.assertEquals(Retrofit::class, mainActivity.getCallBack())
+    fun testRotateScreen() {
+        onView(isRoot()).perform(waitFor(5000))
+        mainActivity.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+
+        for (i in 1..4) {
+            onView(withId(R.id.rv_list_projects)).perform(swipeUp())
+            onView(isRoot()).perform(waitFor(2000))
+        }
+
+        onView(isRoot()).perform(waitFor(4000))
+        mainActivity.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
+    }
+
+    private fun waitFor(delay: Long): ViewAction? {
+        return object : ViewAction {
+            override fun getConstraints(): Matcher<View> = isRoot()
+            override fun getDescription(): String = "Espere por $delay milesimo de segundos"
+            override fun perform(uiController: UiController, v: View?) {
+                uiController.loopMainThreadForAtLeast(delay)
+            }
+        }
     }
 }

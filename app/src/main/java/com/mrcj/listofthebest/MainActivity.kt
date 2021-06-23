@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         addItems()
     }
 
-    fun getCallBack() = RetrofitUtils.getRetrofitInstance(urlBase)
+    private fun getCallBack() = RetrofitUtils.getRetrofitInstance(urlBase)
         .create(Repositories::class.java)
         .getList("language:kotlin", "stars", page)
 
