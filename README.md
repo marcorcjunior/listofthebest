@@ -18,12 +18,17 @@
 	🚧  Concluído...  🚧
 </h4>
 
+<br>
+<br>
+
 <p align="center">
   <a>
-    <img src="https://raw.githubusercontent.com/marcorcjunior/listofthebest/develop/app/src/main/ic_launcher-playstore.png" height="175" width="175" alt="List of the best" />
+    <img src="https://raw.githubusercontent.com/marcorcjunior/listofthebest/develop/preview/listofthebest.gif" height="675" alt="List of the best" />
   </a>
 </p>
 
+<br>
+<br>
 
 ### Features
 

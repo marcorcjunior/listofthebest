@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                if () {
+                if (!canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
                     loadStateAdapter.loadState = LoadState.Loading
                     postDelayed({
                             page += 1
